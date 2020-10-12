@@ -18,11 +18,11 @@ public class DivisionPrinter {
 
 	public void printBase() {
 		DivisionStep firstStep = divisionSteps.get(0);
-		String firstIndent = Integer.toString(firstStep.getIndent());
+		String firstDiv = Integer.toString(firstStep.getDividend());
 		String firstMult = Integer.toString(firstStep.getMult());
 		String firstStringFormatter = "_%s|%s\n";
-		String space = countSpaces((divident.length() + 1), firstIndent.length());
-		String nextStringsormatter = " %" + firstIndent.length() + "s%" + space + "s%s%n";
+		String space = countSpaces((divident.length() + 1), firstDiv.length());
+		String nextStringsormatter = " %s%" + space + "s%s%n";
 
 		System.out.printf(firstStringFormatter, divident, diviser);
 		System.out.printf(nextStringsormatter, firstMult, "|", countLines(quotient));
@@ -32,7 +32,7 @@ public class DivisionPrinter {
 			printDivision();
 		} else {
 			String firstRemiinder = Integer.toString(firstStep.getRemainder());
-			String secondStringsormatter = " %" + firstIndent.length() + "s";
+			String secondStringsormatter = " %" + firstDiv.length() + "s";
 
 			System.out.printf(secondStringsormatter, firstRemiinder);
 		}
@@ -40,16 +40,16 @@ public class DivisionPrinter {
 
 	public void printDivision() {
 		for (int i = 1; i < divisionSteps.size(); i++) {
-			DivisionStep previousStep = divisionSteps.get(i - 1);
 			DivisionStep step = divisionSteps.get(i);
-			String prevIndent = Integer.toString(previousStep.getIndent());
-			String nextIndent = Integer.toString(step.getIndent());
+			String nextDiv = Integer.toString(step.getDividend());
 			String nextMult = Integer.toString(step.getMult());
-			String stringFormatter = " %" + (prevIndent.length() + i) + "s%n";
+			String nextRem = Integer.toString(step.getRemainder());
+			String nextIndent = Integer.toString(step.getIndent() + 1);
+			String stringFormatter = "%" + nextIndent + "s%n";
 
-			System.out.printf(stringFormatter, nextIndent);
+			System.out.printf(stringFormatter, nextDiv);
 			System.out.printf(stringFormatter, nextMult);
-			System.out.printf(stringFormatter, countLines(nextIndent));
+			System.out.printf(stringFormatter, countLines(nextDiv));
 
 			if ((i + 1) == divisionSteps.size()) {
 				String reminder = Integer.toString(step.getRemainder());
@@ -68,11 +68,11 @@ public class DivisionPrinter {
 		return result.toString();
 	}
 
-	public static String countSpaces(int firstString, int secondString) {
+	public static String countSpaces(int firstLength, int secondLength) {
 		String result = "";
 		
-		if (firstString != secondString) {
-			result = Integer.toString(firstString - secondString);
+		if (firstLength != secondLength) {
+			result = Integer.toString(firstLength - secondLength);
 		} 
 		return result;
 	}
