@@ -47,7 +47,7 @@ public class DivisionPrinter {
 			String nextIndent = Integer.toString(step.getIndent() + 1);
 			String stringFormatter = "%" + nextIndent + "s%n";
 
-			System.out.printf(stringFormatter, nextDiv);
+			System.out.printf(stringFormatter, "_" + nextDiv);
 			System.out.printf(stringFormatter, nextMult);
 			System.out.printf(stringFormatter, countLines(nextDiv));
 
