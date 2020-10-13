@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Stack;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import com.longdivision.DivisionModel;
 import com.longdivision.DivisionStep;
 
