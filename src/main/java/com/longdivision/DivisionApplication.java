@@ -16,6 +16,7 @@ public class DivisionApplication {
 			model = new DivisionModel(divident, diviser);
 			printer = new DivisionPrinter(model);
 			printer.printBase();
+			System.out.println(printer.getOutput());
 		}
 	}
 

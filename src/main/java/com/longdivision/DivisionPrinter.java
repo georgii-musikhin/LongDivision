@@ -1,6 +1,7 @@
 package com.longdivision;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 
 public class DivisionPrinter {
@@ -8,6 +9,7 @@ public class DivisionPrinter {
 	private String diviser;
 	private String quotient;
 	private List<DivisionStep> divisionSteps = new ArrayList<DivisionStep>();
+	private String output = "";
 
 	public DivisionPrinter(DivisionModel model) {
 		divident = Integer.toString(model.getDivident());
@@ -22,11 +24,11 @@ public class DivisionPrinter {
 		String firstMult = Integer.toString(firstStep.getMult());
 		String firstStringFormatter = "_%s|%s\n";
 		String space = countSpaces((divident.length() + 1), firstDiv.length());
-		String nextStringsormatter = " %s%" + space + "s%s%n";
+		String nextStringsormatter = " %s%" + space + "s%s\n";
 
-		System.out.printf(firstStringFormatter, divident, diviser);
-		System.out.printf(nextStringsormatter, firstMult, "|", countLines(quotient));
-		System.out.printf(nextStringsormatter, countLines(firstMult), "|", quotient);
+		output += String.format(firstStringFormatter, divident, diviser);
+		output += String.format(nextStringsormatter, firstMult, "|", countLines(quotient));
+		output += String.format(nextStringsormatter, countLines(firstMult), "|", quotient);
 
 		if (divisionSteps.size() > 1) {
 			printDivision();
@@ -34,7 +36,7 @@ public class DivisionPrinter {
 			String firstRemiinder = Integer.toString(firstStep.getRemainder());
 			String secondStringsormatter = " %" + firstDiv.length() + "s";
 
-			System.out.printf(secondStringsormatter, firstRemiinder);
+			output += String.format(secondStringsormatter, firstRemiinder);
 		}
 	}
 
@@ -45,16 +47,16 @@ public class DivisionPrinter {
 			String nextMult = Integer.toString(step.getMult());
 			String nextRem = Integer.toString(step.getRemainder());
 			String nextIndent = Integer.toString(step.getIndent() + 1);
-			String stringFormatter = "%" + nextIndent + "s%n";
+			String stringFormatter = "%" + nextIndent + "s\n";
 
-			System.out.printf(stringFormatter, "_" + nextDiv);
-			System.out.printf(stringFormatter, nextMult);
-			System.out.printf(stringFormatter, countLines(nextDiv));
+			output += String.format(stringFormatter, "_" + nextDiv);
+			output += String.format(stringFormatter, nextMult);
+			output += String.format(stringFormatter, countLines(nextDiv));
 
 			if ((i + 1) == divisionSteps.size()) {
 				String reminder = Integer.toString(step.getRemainder());
 
-				System.out.printf(stringFormatter, reminder);
+				output += String.format(stringFormatter, reminder);
 			}
 		}
 	}
@@ -75,5 +77,8 @@ public class DivisionPrinter {
 			result = Integer.toString(firstLength - secondLength);
 		} 
 		return result;
+	}
+	public String getOutput() {
+		return output;
 	}
 }
