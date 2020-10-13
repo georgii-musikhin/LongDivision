@@ -12,20 +12,22 @@ public class DivisionModel {
 	private List<DivisionStep> divisionSteps = new ArrayList<DivisionStep>();
 	
 	public DivisionModel(int divident, int diviser) {
-		if(diviser == 0) {
-			throw new ArithmeticException("You cannot divide by zero!");
-		}
+		checkArguments(divident, diviser);
+		
 		this.divident = divident;
 		this.diviser = diviser;
 		this.quotient = divident / diviser;
+		this.divisionSteps = fillListOfSteps(divident, diviser);
 	}
 	
-	public void fillListOfSteps() {
+	public static ArrayList<DivisionStep> fillListOfSteps(int divident, int diviser) {
+		ArrayList<DivisionStep> result = new ArrayList<DivisionStep>();
 		Stack<Integer> splittedByDigits = splitNumberByDigits(divident);
 		 
 		while(!splittedByDigits.isEmpty()) {
-			divisionSteps.add(new DivisionStep(splittedByDigits, diviser));
+			result.add(new DivisionStep(splittedByDigits, diviser));
 		}
+		return result;
 	}
 	public static Stack<Integer> splitNumberByDigits(int number) {  
 		Stack<Integer> result = new Stack<Integer>();
@@ -50,5 +52,20 @@ public class DivisionModel {
 
 	public List<DivisionStep> getDivisionSteps() {
 		return divisionSteps;
+	}
+	
+	private static void checkArguments(int divident, int diviser) {
+		if((divident < 0) || (diviser < 0)) {
+			throw new IllegalArgumentException("Arguments must be positive");
+		}
+		if(diviser == 0) {
+			throw new IllegalArgumentException("You cannot divide by zero");
+		}
+		if(diviser > divident) {
+			throw new IllegalArgumentException("Dividend must be greater than or equal to the quotient");
+		}
+	}
+	public static void main(String[] args) {
+		DivisionModel model = new DivisionModel(2005002, 2);
 	}
 }

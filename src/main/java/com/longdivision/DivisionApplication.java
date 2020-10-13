@@ -14,7 +14,6 @@ public class DivisionApplication {
 			System.out.print("Intput diviser: ");
 			int diviser = sc.nextInt();
 			model = new DivisionModel(divident, diviser);
-			model.fillListOfSteps();
 			printer = new DivisionPrinter(model);
 			printer.printBase();
 		}
