@@ -1,25 +1,22 @@
 package com.longdivision;
 
-import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
 
 public class DivisionPrinter {
-	private String divident;
-	private String diviser;
-	private String quotient;
-	private List<DivisionStep> divisionSteps = new ArrayList<DivisionStep>();
+	private DivisionModel model;
 	private StringBuilder output = new StringBuilder();
 
-	public DivisionPrinter(DivisionModel model) {
-		divident = Integer.toString(model.getDivident());
-		diviser = Integer.toString(model.getDiviser());
-		quotient = Integer.toString(model.getQuotient());
-		divisionSteps = model.getDivisionSteps();
+	public DivisionPrinter(int divident, int diviser) {
+		model = new DivisionModel(divident, diviser);
 	}
 
 	public void printBase() {
-		DivisionStep firstStep = divisionSteps.get(0);
+		String divident = Integer.toString(model.getDivident());
+		String diviser = Integer.toString(model.getDiviser());
+		String quotient = Integer.toString(model.getQuotient());
+		List<DivisionStep> divisionSteps = model.getDivisionSteps();
+		
+		DivisionStep firstStep = model.getDivisionSteps().get(0);
 		String firstDiv = Integer.toString(firstStep.getDividend());
 		String firstMult = Integer.toString(firstStep.getMult());
 		String firstStringFormatter = "_%s|%s\n";
@@ -41,6 +38,8 @@ public class DivisionPrinter {
 	}
 
 	public void printDivision() {
+		List<DivisionStep> divisionSteps = model.getDivisionSteps();
+		
 		for (int i = 1; i < divisionSteps.size(); i++) {
 			DivisionStep step = divisionSteps.get(i);
 			String nextDiv = Integer.toString(step.getDividend());

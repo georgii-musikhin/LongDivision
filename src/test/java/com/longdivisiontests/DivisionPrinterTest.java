@@ -3,15 +3,11 @@ package com.longdivisiontests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
-import com.longdivision.DivisionModel;
 import com.longdivision.DivisionPrinter;
 
 class DivisionPrinterTest {
-	
-	private final DivisionModel model = new DivisionModel(1823000002, 13);
-		
+			
 	@BeforeAll
 	void testModelPrintSuccess() {
 		String expected = "_1823000002|13\n"
@@ -37,7 +33,7 @@ class DivisionPrinterTest {
 				        + "        ---\n"
 				        + "          5\n";
 		
-		DivisionPrinter printer = new DivisionPrinter(model);
+		DivisionPrinter printer = new DivisionPrinter(1823000002, 13);
 		printer.printBase();
 		String actual = printer.getOutput();
 		assertEquals(expected, actual);

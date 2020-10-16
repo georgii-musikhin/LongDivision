@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Stack;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import com.longdivision.DivisionModel;
+import com.longdivision.DivisionModelUtils;
 import com.longdivision.DivisionStep;
 
 class DivisionModelTest {
@@ -78,7 +78,7 @@ class DivisionModelTest {
 		expected.push(1);
 		expected.push(1);
 		
-		Stack<Integer> actual = DivisionModel.splitNumberByDigits(1194);
+		Stack<Integer> actual = DivisionModelUtils.splitNumberByDigits(1194);
 		assertEquals(expected, actual);
 	}
 	
