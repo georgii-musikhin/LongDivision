@@ -9,7 +9,7 @@ public class DivisionModel {
 	private int divident;
 	private int diviser;
 	private int quotient;
-	private List<DivisionStep> divisionSteps = new ArrayList<DivisionStep>();
+	private List<DivisionStep> divisionSteps;
 	
 	public DivisionModel(int divident, int diviser) {
 		checkArguments(divident, diviser);
@@ -17,6 +17,7 @@ public class DivisionModel {
 		this.divident = divident;
 		this.diviser = diviser;
 		this.quotient = divident / diviser;
+		this.divisionSteps = new ArrayList<DivisionStep>();
 		this.divisionSteps = fillListOfSteps(divident, diviser);
 	}
 	
